@@ -1,0 +1,12 @@
+Profile,
+Create your profile here!,
+First name,
+Last name,
+Username,
+Password,
+Confirm password,
+Security Questions,
+What is your favorite color?,
+What is your birthdate?,
+Submit,
+Missing input
