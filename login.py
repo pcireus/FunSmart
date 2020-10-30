@@ -1,14 +1,12 @@
 from tkinter import*
 import os
+import Methods # custome methods module
+import Home 
 
 root = Tk()
 root.title("FunSmart Login Screen")
 
-def isEmpty(str):
-    return str ==""
-
 def checkLogin():
-    #global root
     #---------------------------------------------------------------
     #   Open up the username_profile.txt and verify the user credentials
     #       if the credentials match what is in file, upload user progress
@@ -20,10 +18,7 @@ def checkLogin():
     profileName = loginUsernameEntry.get() +"_profile.txt"
 
     if os.path.isfile(profileName):
-        with open(profileName,"r") as file:
-            temp = file.read().split(",")
-            existingProfile = [content for content in temp if content.strip()]
-        
+        existingProfile = Methods.fileSplitter(profileName)        
         searchedUsername = existingProfile[2]
         searchedPassword = existingProfile[3]
 
@@ -31,7 +26,7 @@ def checkLogin():
             print("Successful Login") #remove the hard code
             # Send user to homePage
             Label(frame,text="Successful Login").grid(row=2,column=2)
-            
+            Home.main(root, frame)
         else:
             Label(frame,text="incorrect password").grid(row=2,column=2)
     else:
@@ -57,7 +52,7 @@ def submitProfile():
     #Check for completed fields
     submitNow = True
     for field in profileContent:
-        if(isEmpty(field) == True):
+        if(Methods.isEmpty(field) == True):
             submitNow = False
             error = proErrorInput + "*"
             Label(createProfileWindow, text=error).grid(row=10, column=2)
@@ -86,9 +81,7 @@ def createProfile():
     #       password
     #------------------------------------------------------------------------
     
-    with open("profileMaker.txt","r") as file:
-        temp = file.read().split(",")
-        profileMaker = [content for content in temp if content.strip()]
+    profileMaker = Methods.fileSplitter("profileMaker.txt")
     
     #Strip all the profile components from the profilemaker
     profTitle = profileMaker[0]
@@ -163,7 +156,6 @@ login = Button(frame, text="Login", bg="lightgreen", command= checkLogin)
 login.grid(row=2,column=0)
 
 #Global profile variable
-
 var_name = StringVar()
 FnameEntry = StringVar()
 LnameEntry = StringVar()
@@ -176,6 +168,5 @@ securityQuestion2Entry = StringVar()
 #signUp button
 signUp = Button(frame, text="Sign Up", bg="lightgreen", command = createProfile)
 signUp.grid(row=2,column=1)
-
 
 root.mainloop()
