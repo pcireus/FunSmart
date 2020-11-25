@@ -1,5 +1,5 @@
-from tkinter import*
-import os
+from tkinter import* # allows us to work with grapics
+import os           # allos us to work with files
 import Methods # custome methods module
 import Home 
 
@@ -13,19 +13,17 @@ def checkLogin():
     #        from file and go to main home screen
     #
     #---------------------------------------------------------------
-    print(loginUsernameEntry.get())
-    print(loginPasswordEntry.get())
     profileName = loginUsernameEntry.get() +"_profile.txt"
-
+    #Check if the username profile exist
     if os.path.isfile(profileName):
         existingProfile = Methods.fileSplitter(profileName)        
         searchedUsername = existingProfile[2]
         searchedPassword = existingProfile[3]
-
+        #Check if the username and passwrod match
         if(searchedUsername == loginUsernameEntry.get() and searchedPassword == loginPasswordEntry.get()):
-            print("Successful Login") #remove the hard code
             # Send user to homePage
             Label(frame,text="Successful Login").grid(row=2,column=2)
+            #Go to the home Screen module
             Home.main(root, frame)
         else:
             Label(frame,text="incorrect password").grid(row=2,column=2)
@@ -39,8 +37,6 @@ def submitProfile():
     #   When user submits their profile, create a profile with the username_profile.txt
     #       store all of the acquired data in the profile
     #------------------------------------------------------------------------
-    print("ready to submit")
-    print("Data: " + usernameEntry.get())
     profileContent=[]
     profileContent.append(FnameEntry.get())
     profileContent.append(LnameEntry.get())
@@ -61,9 +57,8 @@ def submitProfile():
     if(submitNow ):
         saveProfile = usernameEntry.get() + "_profile.txt" 
         if(os.path.isfile(saveProfile)):
-            print("profile for "+ usernameEntry.get() + " already exist")
+
         else:
-            print("file created")
             with open(saveProfile,"w") as file:
                 for content in profileContent:
                     file.write(content + ",")
