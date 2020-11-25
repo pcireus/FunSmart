@@ -58,12 +58,11 @@ def submitProfile():
         saveProfile = usernameEntry.get() + "_profile.txt" 
         if(os.path.isfile(saveProfile)):
 
-        else:
             with open(saveProfile,"w") as file:
                 for content in profileContent:
                     file.write(content + ",")
-            #close profile window
-            createProfileWindow.destroy()
+        #close profile window
+        createProfileWindow.destroy()
 
 def createProfile():
     #Lets function know you are using the global defined values
