@@ -3,7 +3,6 @@ from tkinter import messagebox
 import os
 import Methods
 import random
-import sandbox2
 from tkmacosx import Button
 
 # ------------------------------------------------------------

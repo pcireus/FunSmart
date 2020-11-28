@@ -1,6 +1,7 @@
 from tkinter import* # allows us to work with grapics
 import os           # allos us to work with files
 import Methods # custome methods module
+from tkmacosx import Button
 import Home 
 
 root = Tk()
@@ -26,9 +27,9 @@ def checkLogin():
             #Go to the home Screen module
             Home.main(root, frame)
         else:
-            Label(frame,text="incorrect password").grid(row=2,column=2)
+            Label(frame,text="incorrect password/username").grid(row=2,column=2)
     else:
-        Label(frame,text="incorrect username").grid(row=3,column=2) # remove the hard code
+        Label(frame,text="incorrect password/username").grid(row=3,column=2) # remove the hard code
 
 createProfileWindow = None
 proErrorInput = None    
@@ -53,16 +54,15 @@ def submitProfile():
             error = proErrorInput + "*"
             Label(createProfileWindow, text=error).grid(row=10, column=2)
             break
-    #check if user profile already exist
+    #check if user profile does not exist
     if(submitNow ):
         saveProfile = usernameEntry.get() + "_profile.txt" 
-        if(os.path.isfile(saveProfile)):
-
+        if(os.path.isfile(saveProfile) == False):
             with open(saveProfile,"w") as file:
                 for content in profileContent:
                     file.write(content + ",")
-        #close profile window
-        createProfileWindow.destroy()
+            #close profile window
+            createProfileWindow.destroy()
 
 def createProfile():
     #Lets function know you are using the global defined values
@@ -74,9 +74,7 @@ def createProfile():
     #       If profile already exist for the user, allow the user to reset his
     #       password
     #------------------------------------------------------------------------
-    
     profileMaker = Methods.fileSplitter("profileMaker.txt")
-    
     #Strip all the profile components from the profilemaker
     profTitle = profileMaker[0]
     profHeader = profileMaker[1]
@@ -90,7 +88,6 @@ def createProfile():
     profSecurityQuestion2 = profileMaker[9]
     profSubmit = profileMaker[10]
     proErrorInput = profileMaker[11]
-    
     
     createProfileWindow = Toplevel(root)
     createProfileWindow.title(profTitle)
@@ -121,7 +118,7 @@ def createProfile():
     Entry(createProfileWindow, textvariable = securityQuestion1Entry, width=20).grid(row=8,column=1)
     Entry(createProfileWindow, textvariable = securityQuestion2Entry, width=20).grid(row=9,column=1)
 
-    btn = Button(createProfileWindow,text= profSubmit, background="#263D42",command = submitProfile)
+    btn = Button(createProfileWindow,text= profSubmit, background="lightgreen",command = submitProfile)
     btn.grid(row=10,column=1)
 
 #Exterior canvas

@@ -4,6 +4,7 @@ import GameBoard
 import Methods
 import random
 from tkinter import messagebox
+from tkmacosx import Button
 # --------------------------
 # Global Variables
 # --------------------------
@@ -181,5 +182,5 @@ def main(Root, frame, subject):
     statusBar = Label(NextFrame, text=str(questionIndex)+" - "+str(totalQuestion))
     statusBar.pack(anchor = W)
     
-    button = Button(NextFrame, text=" Next Question ",command = lambda:nextQuestion(frame, subject))
+    button = Button(NextFrame, bg = "lightgreen", text="Next Question",command = lambda:nextQuestion(frame, subject))
     button.pack(anchor = E)

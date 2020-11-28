@@ -4,7 +4,6 @@ import Methods
 import PreTest
 from tkmacosx import Button
 
-
 def main(root, frame):
     frame.destroy()
     root.title("FunSmart Home Screen")
